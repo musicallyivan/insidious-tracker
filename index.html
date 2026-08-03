@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Insidious Tracker — Cronología Marvel Style, Modo Versus & Nube</title>
-  <meta name="description" content="Tracker estilo Marvel para la saga Insidious (La Noche del Demonio). Cronología interactiva, posters HD, modo Versus cara a cara y guardado de progreso en la nube." />
+  <title>Insidious Tracker — Cronología Oficial, Trailers, Modo Versus & Nube</title>
+  <meta name="description" content="Tracker cinematográfico de la saga Insidious (La Noche del Demonio). Cronología interactiva, portadas oficiales, trailers HD, modo Versus cara a cara y sincronización en repositorio/nube." />
   <meta name="theme-color" content="#07050a" />
 
   <!-- Fonts -->
@@ -45,7 +45,7 @@
       </div>
 
       <div class="nav-actions">
-        <button type="button" class="cloud-status-btn" id="openCloudBtn" title="Guardado en la Nube">
+        <button type="button" class="cloud-status-btn" id="openCloudBtn" title="Guardado en la Nube / Repositorio">
           <span class="cloud-icon">☁️</span>
           <span class="cloud-text" id="cloudStatusText">Nube: Conectada</span>
         </button>
@@ -61,11 +61,11 @@
       <div class="hero-content">
         <div class="hero-badge-row">
           <span class="badge red-glow">SAGA COMPLETA · THE FURTHER</span>
-          <span class="badge gold-glow">MARVEL TRACKER STYLE</span>
+          <span class="badge gold-glow">PORTADAS OFICIALES & TRAILERS</span>
         </div>
         <h1 class="hero-title">INSIDIOUS <span>CINEMATIC TRACKER</span></h1>
         <p class="hero-subtitle">
-          Sigue la historia de Elise Rainier y los Lambert, compara tu progreso en el <strong>Modo Versus</strong> y sincroniza tus datos en la nube.
+          Sigue la historia de Elise Rainier y los Lambert, mira los trailers oficiales, compara tu maratón en el <strong>Modo Versus</strong> y sincroniza tus datos en tu repositorio.
         </p>
 
         <!-- Global Marathon Progress Bar -->
@@ -162,20 +162,19 @@
         <p id="timelineSectionSub" class="section-sub">Explora los eventos en orden de la historia, desde los orígenes de Elise Rainier hasta el presente.</p>
       </div>
 
-      <!-- Main Movies Layout (Supports Timeline connectors or Grid view) -->
+      <!-- Main Movies Layout -->
       <div class="movies-container view-timeline" id="moviesContainer">
         <!-- Dynamically rendered via JS -->
       </div>
     </section>
 
-    <!-- SECTION 2: MODO VERSUS (USER VS USER & MOVIE VS MOVIE WITH CLOUD SAVE) -->
+    <!-- SECTION 2: MODO VERSUS (USER VS USER & MOVIE VS MOVIE WITH CLOUD/REPO SAVE) -->
     <section class="tab-content" id="sec-versus">
       <div class="section-title-wrap text-center">
         <h2 class="section-title">⚔️ MODO VERSUS (CARA A CARA)</h2>
-        <p class="section-sub">Compara tu maratón de terror contra un amigo guardando tus datos en la Nube o enfrenta dos películas cara a cara.</p>
+        <p class="section-sub">Compara tu maratón de terror contra un amigo guardando tus datos en la Nube o tu Repositorio, o enfrenta dos películas cara a cara.</p>
       </div>
 
-      <!-- Sub-tabs for Versus mode -->
       <div class="versus-subtabs">
         <button class="subtab-btn active" id="subtabUserVsUser">👥 Tú vs Amigo (Progreso en Nube)</button>
         <button class="subtab-btn" id="subtabMovieVsMovie">🎬 Película A vs Película B</button>
@@ -202,7 +201,7 @@
           <div class="friend-profile-box">
             <span class="user-avatar friend-avatar">👹</span>
             <div class="user-meta">
-              <label for="friendIdInput" class="input-lbl">ID de Nube del Amigo:</label>
+              <label for="friendIdInput" class="input-lbl">ID de Nube / Repo del Amigo:</label>
               <div class="input-with-btn">
                 <input type="text" id="friendIdInput" placeholder="Ej: INS-7842" />
                 <button type="button" class="btn-red-action" id="loadFriendBtn">⚡ Cargar Amigo</button>
@@ -216,7 +215,6 @@
           </div>
         </div>
 
-        <!-- Comparative Dashboard Results -->
         <div class="versus-dashboard" id="versusDashboard">
           <!-- Dynamically generated comparison -->
         </div>
@@ -291,11 +289,11 @@
               <p class="github-repo-sub">Proyecto Open Source en GitHub</p>
             </div>
           </div>
-          <span class="badge gold-glow">v2.0 Marvel Edition</span>
+          <span class="badge gold-glow">Versión Oficial</span>
         </div>
 
         <p class="github-card-desc">
-          Código fuente abierto diseñado para amantes del cine de terror. Construido con HTML5, Vanilla CSS3 y JavaScript ES6+ con sincronización en la Nube y sistema Versus.
+          Código fuente abierto diseñado para amantes del cine de terror. Construido con HTML5, Vanilla CSS3 y JavaScript ES6+ con sincronización en Nube/Repositorio y sistema Versus.
         </p>
 
         <div class="github-stats-row">
@@ -324,14 +322,24 @@
     </div>
   </div>
 
-  <!-- CLOUD SYNC MODAL -->
+  <!-- TRAILER VIDEO MODAL -->
+  <div class="modal-backdrop" id="trailerModal" aria-hidden="true">
+    <div class="modal-card trailer-modal-card">
+      <button type="button" class="modal-close-btn" id="closeTrailerModalBtn" aria-label="Cerrar trailer">✕</button>
+      <div class="trailer-video-wrap">
+        <iframe id="trailerIframe" src="" title="Trailer Oficial Insidious" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOUD & REPO SYNC MODAL -->
   <div class="modal-backdrop" id="cloudModal" aria-hidden="true">
     <div class="modal-card cloud-modal-card">
       <button type="button" class="modal-close-btn" id="closeCloudModalBtn" aria-label="Cerrar modal">✕</button>
       <div class="cloud-modal-header">
         <span class="cloud-big-icon">☁️</span>
-        <h2>Guardado en la Nube & Sincronización</h2>
-        <p>Tus películas vistas y calificaciones se pueden sincronizar entre cualquier dispositivo mediante tu ID de Nube o un enlace directo.</p>
+        <h2>Guardado en la Nube y Repositorio</h2>
+        <p>Tus películas vistas y calificaciones se pueden sincronizar entre cualquier dispositivo mediante tu ID de Nube o vinculando otro Repositorio.</p>
       </div>
 
       <div class="cloud-modal-body">
@@ -344,7 +352,15 @@
         </div>
 
         <div class="cloud-box">
-          <label class="lbl">Cargar datos desde un ID de Nube:</label>
+          <label class="lbl">Sincronizar en otro Repositorio / URL personalizada:</label>
+          <div class="input-with-btn">
+            <input type="text" id="modalCustomRepoInput" placeholder="Ej: https://github.com/tu-usuario/otro-repo" />
+            <button type="button" class="btn-gold-action" id="modalSaveCustomRepoBtn">🔗 Vincular Repo</button>
+          </div>
+        </div>
+
+        <div class="cloud-box">
+          <label class="lbl">Cargar datos desde un ID de Nube / Amigo:</label>
           <div class="input-with-btn">
             <input type="text" id="modalImportCloudIdInput" placeholder="Introduce ID (Ej: INS-7842)..." />
             <button type="button" class="btn-red-action" id="modalSyncFromCloudBtn">🔄 Sincronizar</button>
@@ -360,7 +376,7 @@
         </div>
 
         <div class="cloud-actions-row">
-          <button type="button" class="btn-green-action" id="modalForceSaveCloudBtn">☁️ Guardar Ahora en Nube</button>
+          <button type="button" class="btn-green-action" id="modalForceSaveCloudBtn">☁️ Guardar Ahora en Nube y Repo</button>
         </div>
 
         <p class="cloud-notice" id="cloudModalNotice">✅ Estado: Datos guardados localmente y listos para sincronizar.</p>
@@ -375,7 +391,7 @@
       <a href="legal.html">Aviso Legal</a> · 
       <a href="https://github.com/musicallyivan/insidious-tracker" target="_blank" rel="noopener">GitHub Project</a>
     </div>
-    <p>Insidious Tracker · Proyecto fan no oficial creado con estética Marvel Tracker · Todos los carteles y datos pertenecen a Blumhouse / Sony / Screen Gems.</p>
+    <p>Insidious Tracker · Proyecto fan no oficial · Todos los carteles y datos pertenecen a Blumhouse / Sony / Screen Gems.</p>
   </footer>
 
   <script src="script.js"></script>

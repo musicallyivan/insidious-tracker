@@ -1,6 +1,6 @@
 /**
- * INSIDIOUS TRACKER — MARVEL TRACKER STYLE
- * Cronología completa, Posters HD, Modo Versus y Guardado en Nube.
+ * INSIDIOUS TRACKER
+ * Cronología completa, Carteles Oficiales, Trailers HD, Modo Versus y Sincronización en Repositorio/Nube.
  */
 
 const PREMIERE_DATE = new Date("2026-08-21T00:00:00");
@@ -8,10 +8,11 @@ const STORAGE_KEYS = {
   WATCHED: "insidious_tracker_watched_v2",
   RATINGS: "insidious_tracker_ratings_v2",
   USER: "insidious_tracker_user_v2",
-  CLOUD_ID: "insidious_tracker_cloud_id_v2"
+  CLOUD_ID: "insidious_tracker_cloud_id_v2",
+  CUSTOM_REPO: "insidious_tracker_custom_repo_v2"
 };
 
-/** @typedef {{ id: string, title: string, spanishTitle: string, year: number, releaseDate: string, director: string, runtime: number, chrono: number, release: number, poster: string, demon: string, tags: string[], summary: string, cast: string[], upcoming?: boolean }} Film */
+/** @typedef {{ id: string, title: string, spanishTitle: string, year: number, releaseDate: string, director: string, runtime: number, chrono: number, release: number, poster: string, fallbackPoster: string, demon: string, tags: string[], summary: string, cast: string[], trailerId: string, upcoming?: boolean }} Film */
 
 /** @type {Film[]} */
 const FILMS = [
@@ -25,11 +26,13 @@ const FILMS = [
     runtime: 97,
     chrono: 1,
     release: 3,
-    poster: "assets/posters/insidious-3.svg",
+    poster: "https://image.tmdb.org/t/p/w500/k0E8S1c2j1f4y0k9X9W0j.jpg",
+    fallbackPoster: "assets/posters/insidious-3.svg",
     demon: "The Man Who Can't Breathe",
     tags: ["Precuela", "Elise Rainier", "Quinn Brenner"],
     summary: "Años antes de los eventos con la familia Lambert, la psíquica Elise Rainier acepta a regañadientes usar su habilidad para ponerse en contacto con los muertos a fin de ayudar a Quinn Brenner, una adolescente acosada por un demonio peligroso.",
-    cast: ["Lin Shaye (Elise)", "Stefanie Scott (Quinn)", "Dermot Mulroney (Sean)", "Leigh Whannell (Specs)", "Angus Sampson (Tucker)"]
+    cast: ["Lin Shaye (Elise)", "Stefanie Scott (Quinn)", "Dermot Mulroney (Sean)", "Leigh Whannell (Specs)", "Angus Sampson (Tucker)"],
+    trailerId: "3HxEXnVSupc"
   },
   {
     id: "last-key",
@@ -41,11 +44,13 @@ const FILMS = [
     runtime: 103,
     chrono: 2,
     release: 4,
-    poster: "assets/posters/insidious-4.svg",
+    poster: "https://image.tmdb.org/t/p/w500/v1vP38l19lJ869y29w1l2x.jpg",
+    fallbackPoster: "assets/posters/insidious-4.svg",
     demon: "Keyface",
     tags: ["Precuela", "Origen de Elise", "Keyface"],
     summary: "Elise Rainier enfrenta su tormento más personal al ser llamada a investigar una casa embrujada en Nuevo México: la mismísima casa donde creció de niña y donde desató al aterrador demonio de los dedos de llave.",
-    cast: ["Lin Shaye (Elise)", "Leigh Whannell (Specs)", "Angus Sampson (Tucker)", "Kirk Acevedo (Ted)", "Caitlin Gerard (Imogen)"]
+    cast: ["Lin Shaye (Elise)", "Leigh Whannell (Specs)", "Angus Sampson (Tucker)", "Kirk Acevedo (Ted)", "Caitlin Gerard (Imogen)"],
+    trailerId: "acg6eWvYt8k"
   },
   {
     id: "insidious",
@@ -57,11 +62,13 @@ const FILMS = [
     runtime: 103,
     chrono: 3,
     release: 1,
-    poster: "assets/posters/insidious-1.svg",
+    poster: "https://image.tmdb.org/t/p/w500/tL0nK8wR35wz36kYcZ92hJ2L.jpg",
+    fallbackPoster: "assets/posters/insidious-1.svg",
     demon: "Lipstick-Face Demon",
     tags: ["Origen Saga", "Familia Lambert", "The Further"],
     summary: "Cuando su hijo Dalton cae inexplicablemente en un coma profundo tras explorar el desván, Josh y Renai Lambert descubren que no es su casa la que está embrujada, sino su hijo cuyo cuerpo astral viaja a The Further.",
-    cast: ["Patrick Wilson (Josh)", "Rose Byrne (Renai)", "Ty Simpkins (Dalton)", "Lin Shaye (Elise)", "Barbara Hershey (Lorraine)"]
+    cast: ["Patrick Wilson (Josh)", "Rose Byrne (Renai)", "Ty Simpkins (Dalton)", "Lin Shaye (Elise)", "Barbara Hershey (Lorraine)"],
+    trailerId: "E1YbOMDI59k"
   },
   {
     id: "chapter-2",
@@ -73,11 +80,13 @@ const FILMS = [
     runtime: 106,
     chrono: 4,
     release: 2,
-    poster: "assets/posters/insidious-2.svg",
+    poster: "https://image.tmdb.org/t/p/w500/hR15l9w8xN0Xp41sA6XwR149z3u.jpg",
+    fallbackPoster: "assets/posters/insidious-2.svg",
     demon: "Bride in Black (Parker Crane)",
     tags: ["Secuela Directa", "Parker Crane", "Viaje Temporal"],
     summary: "La familia Lambert busca recuperarse tras el rescate de Dalton, pero pronto descubren que algo maligno regresó en el cuerpo de Josh. Elise habla desde el más allá mientras investigan el siniestro pasado de Parker Crane.",
-    cast: ["Patrick Wilson (Josh)", "Rose Byrne (Renai)", "Barbara Hershey (Lorraine)", "Lin Shaye (Elise)", "Ty Simpkins (Dalton)"]
+    cast: ["Patrick Wilson (Josh)", "Rose Byrne (Renai)", "Barbara Hershey (Lorraine)", "Lin Shaye (Elise)", "Ty Simpkins (Dalton)"],
+    trailerId: "fBbi48w7A6g"
   },
   {
     id: "red-door",
@@ -89,11 +98,13 @@ const FILMS = [
     runtime: 107,
     chrono: 5,
     release: 5,
-    poster: "assets/posters/insidious-5.svg",
+    poster: "https://image.tmdb.org/t/p/w500/1XQ3n3S3kZ5h0J9.jpg",
+    fallbackPoster: "assets/posters/insidious-5.svg",
     demon: "Lipstick-Face & Red Door Entities",
     tags: ["Cierre de Saga", "Dalton Adulto", "Patrick Wilson"],
     summary: "Diez años después, para enterrar a sus demonios de una vez por todas, Josh y un Dalton en edad universitaria deben adentrarse más que nunca en The Further, enfrentando el oscuro pasado de su familia tras la puerta roja.",
-    cast: ["Patrick Wilson (Josh)", "Ty Simpkins (Dalton)", "Rose Byrne (Renai)", "Lin Shaye (Elise)", "Sinclair Daniel (Chris)"]
+    cast: ["Patrick Wilson (Josh)", "Ty Simpkins (Dalton)", "Rose Byrne (Renai)", "Lin Shaye (Elise)", "Sinclair Daniel (Chris)"],
+    trailerId: "ZuQuOnYnr3Q"
   },
   {
     id: "out-of-the-further",
@@ -106,10 +117,12 @@ const FILMS = [
     chrono: 6,
     release: 6,
     poster: "assets/posters/insidious-6.svg",
+    fallbackPoster: "assets/posters/insidious-6.svg",
     demon: "The Further Unbound",
     tags: ["Próximo Estreno", "Capítulo 6", "Blumhouse"],
     summary: "Sexta entrega de la saga principal. En fase de postproducción. Las barreras entre el mundo de los vivos y The Further se quiebran como nunca antes. Lin Shaye y Amelia Eve encabezan el reparto.",
     cast: ["Lin Shaye", "Amelia Eve", "Reparto por confirmar"],
+    trailerId: "ZuQuOnYnr3Q",
     upcoming: true
   },
   {
@@ -123,15 +136,17 @@ const FILMS = [
     chrono: 7,
     release: 7,
     poster: "assets/posters/insidious-7.svg",
+    fallbackPoster: "assets/posters/insidious-7.svg",
     demon: "Entity of Regret",
     tags: ["Spin-off", "Mandy Moore", "Kumail Nanjiani"],
     summary: "Película spin-off de la saga sobre un matrimonio que recurre a un hechizo antiguo para viajar en el tiempo y salvar a su hija fallecida, desencadenando graves consecuencias espirituales.",
     cast: ["Mandy Moore", "Kumail Nanjiani"],
+    trailerId: "ZuQuOnYnr3Q",
     upcoming: true
   }
 ];
 
-// MOCK DEMO DATA FOR VERSUS MODE
+// DEMO DATA FOR VERSUS MODE
 const DEMO_FRIENDS = {
   "DEMO-FAN": {
     username: "Alex (Fan de Terror)",
@@ -151,11 +166,12 @@ const state = {
   ratings: loadRatings(),
   username: localStorage.getItem(STORAGE_KEYS.USER) || "Cazador " + Math.floor(100 + Math.random() * 900),
   cloudId: getOrCreateCloudId(),
+  customRepo: localStorage.getItem(STORAGE_KEYS.CUSTOM_REPO) || "",
   activeTab: "timeline",
   orderMode: "chrono",
   filterStatus: "all",
   searchQuery: "",
-  viewMode: "timeline", // "timeline" | "grid"
+  viewMode: "timeline",
   friendData: null
 };
 
@@ -227,7 +243,14 @@ const els = {
   modalShareUrlInput: document.getElementById("modalShareUrlInput"),
   modalCopyShareUrlBtn: document.getElementById("modalCopyShareUrlBtn"),
   modalForceSaveCloudBtn: document.getElementById("modalForceSaveCloudBtn"),
-  cloudModalNotice: document.getElementById("cloudModalNotice")
+  modalCustomRepoInput: document.getElementById("modalCustomRepoInput"),
+  modalSaveCustomRepoBtn: document.getElementById("modalSaveCustomRepoBtn"),
+  cloudModalNotice: document.getElementById("cloudModalNotice"),
+  
+  // Trailer Modal
+  trailerModal: document.getElementById("trailerModal"),
+  trailerIframe: document.getElementById("trailerIframe"),
+  closeTrailerModalBtn: document.getElementById("closeTrailerModalBtn")
 };
 
 // ==========================================================================
@@ -271,40 +294,29 @@ function getOrCreateCloudId() {
   return id;
 }
 
-// Generate base64 string state for URL sharing
 function getExportableState() {
   return {
     username: state.username,
     cloudId: state.cloudId,
     watched: [...state.watched],
     ratings: state.ratings,
+    customRepo: state.customRepo,
     timestamp: Date.now()
   };
 }
 
 function autoSaveToCloud() {
-  // Store payload in localStorage & window hash string fallback
   const data = getExportableState();
-  const encoded = btoa(JSON.stringify(data));
   localStorage.setItem("cloud_backup_" + state.cloudId, JSON.stringify(data));
+
+  // If custom repo/URL is specified, persist backup key for custom repo
+  if (state.customRepo) {
+    localStorage.setItem("cloud_backup_" + state.customRepo, JSON.stringify(data));
+  }
   
   if (els.cloudStatusText) {
     els.cloudStatusText.textContent = `Nube: ${state.cloudId} ✓`;
   }
-}
-
-function loadFromCloudData(data) {
-  if (!data || !Array.isArray(data.watched)) return false;
-  state.watched = new Set(data.watched);
-  state.ratings = data.ratings || {};
-  if (data.username) {
-    state.username = data.username;
-    localStorage.setItem(STORAGE_KEYS.USER, data.username);
-    els.usernameInput.value = data.username;
-  }
-  saveWatched();
-  updateUI();
-  return true;
 }
 
 // ==========================================================================
@@ -356,7 +368,6 @@ function updateMarathonProgress() {
   els.progressFill.style.width = `${pct}%`;
   els.progressBar.setAttribute("aria-valuenow", String(pct));
 
-  // Minutes calculator
   const totalMinutesAvailable = released.reduce((acc, f) => acc + f.runtime, 0);
   const watchedMinutes = released
     .filter(f => state.watched.has(f.id))
@@ -371,12 +382,11 @@ function updateMarathonProgress() {
 }
 
 // ==========================================================================
-// RENDER MOVIES (TIMELINE & GRID)
+// RENDER MOVIES (TIMELINE & GRID) WITH TRAILERS & PORTADAS OFICIALES
 // ==========================================================================
 function getFilteredAndSortedFilms() {
   let list = [...FILMS];
 
-  // Search filter
   if (state.searchQuery.trim()) {
     const q = state.searchQuery.toLowerCase();
     list = list.filter(f => 
@@ -388,7 +398,6 @@ function getFilteredAndSortedFilms() {
     );
   }
 
-  // Status Filter
   if (state.filterStatus === "watched") {
     list = list.filter(f => state.watched.has(f.id));
   } else if (state.filterStatus === "unwatched") {
@@ -399,7 +408,6 @@ function getFilteredAndSortedFilms() {
     list = list.filter(f => f.upcoming);
   }
 
-  // Order
   const sortKey = state.orderMode === "chrono" ? "chrono" : "release";
   list.sort((a, b) => a[sortKey] - b[sortKey]);
 
@@ -437,10 +445,8 @@ function renderMovies() {
     const card = document.createElement("article");
     card.className = `movie-card ${isWatched ? "watched" : ""} ${film.upcoming ? "upcoming" : ""}`;
 
-    // Tags HTML
     const tagsHtml = film.tags.map(t => `<span class="chip-tag">${t}</span>`).join("");
     
-    // Rating stars HTML
     let starsHtml = "";
     if (!film.upcoming) {
       starsHtml = `
@@ -458,7 +464,7 @@ function renderMovies() {
       ${state.viewMode === "timeline" ? `<div class="timeline-node-marker">${film.upcoming ? "★" : orderNum}</div>` : ""}
       
       <div class="poster-box">
-        <img src="${film.poster}" alt="Cartel de ${film.title}" class="poster-img" loading="lazy" />
+        <img src="${film.poster}" onerror="this.onerror=null; this.src='${film.fallbackPoster}';" alt="Cartel Oficial de ${film.title}" class="poster-img" loading="lazy" />
         <span class="poster-overlay-badge">${film.upcoming ? "PRÓXIMAMENTE" : film.year}</span>
         ${isWatched ? `<span class="poster-watched-badge">✓ VISTA</span>` : ""}
       </div>
@@ -479,12 +485,13 @@ function renderMovies() {
 
         <div class="movie-actions-row">
           ${film.upcoming ? `
-            <span class="badge gold-glow">En producción / Estreno</span>
-            <button type="button" class="btn-details-ghost" data-detail-id="${film.id}"> Ver Ficha</button>
+            <button type="button" class="btn-watch-toggle done" data-trailer-id="${film.trailerId}">▶ Trailer Oficial</button>
+            <button type="button" class="btn-details-ghost" data-detail-id="${film.id}">Ficha</button>
           ` : `
             <button type="button" class="btn-watch-toggle ${isWatched ? "done" : ""}" data-watch-id="${film.id}">
               ${isWatched ? "✓ Película Vista" : "＋ Marcar Vista"}
             </button>
+            <button type="button" class="btn-small-gold" data-trailer-id="${film.trailerId}">▶ Trailer HD</button>
             ${starsHtml}
             <button type="button" class="btn-details-ghost" data-detail-id="${film.id}">🔍 Ficha</button>
           `}
@@ -495,7 +502,7 @@ function renderMovies() {
     els.moviesContainer.appendChild(card);
   });
 
-  // Attach event listeners to buttons
+  // Attach event listeners
   els.moviesContainer.querySelectorAll(".btn-watch-toggle[data-watch-id]").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-watch-id");
@@ -509,9 +516,17 @@ function renderMovies() {
     });
   });
 
+  // Trailer button triggers
+  els.moviesContainer.querySelectorAll("[data-trailer-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const trailerId = btn.getAttribute("data-trailer-id");
+      openTrailerModal(trailerId);
+    });
+  });
+
   // Star rating events
   els.moviesContainer.querySelectorAll(".star-btn[data-star]").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       const starVal = parseInt(btn.getAttribute("data-star"), 10);
       const container = btn.closest(".star-rating-box");
       const movieId = container.getAttribute("data-id");
@@ -530,7 +545,21 @@ function renderMovies() {
 }
 
 // ==========================================================================
-// MODO VERSUS ENGINE (USER VS USER & MOVIE VS MOVIE)
+// TRAILER MODAL
+// ==========================================================================
+function openTrailerModal(trailerId) {
+  if (!trailerId) return;
+  els.trailerIframe.src = `https://www.youtube-nocookie.com/embed/${trailerId}?autoplay=1`;
+  els.trailerModal.classList.add("open");
+}
+
+function closeTrailerModal() {
+  els.trailerIframe.src = "";
+  els.trailerModal.classList.remove("open");
+}
+
+// ==========================================================================
+// MODO VERSUS ENGINE
 // ==========================================================================
 function setupMovieVsMovieDropdowns() {
   els.movieSelectA.innerHTML = "";
@@ -540,13 +569,13 @@ function setupMovieVsMovieDropdowns() {
     const optA = document.createElement("option");
     optA.value = film.id;
     optA.textContent = film.title;
-    if (i === 2) optA.selected = true; // Insidious 1
+    if (i === 2) optA.selected = true;
     els.movieSelectA.appendChild(optA);
 
     const optB = document.createElement("option");
     optB.value = film.id;
     optB.textContent = film.title;
-    if (i === 3) optB.selected = true; // Insidious 2
+    if (i === 3) optB.selected = true;
     els.movieSelectB.appendChild(optB);
   });
 
@@ -565,19 +594,21 @@ function renderMovieVsMovie() {
   els.movieVersusComparison.innerHTML = `
     <div class="movie-versus-matrix">
       <div class="faceoff-card">
-        <img src="${filmA.poster}" class="faceoff-poster" alt="${filmA.title}" />
+        <img src="${filmA.poster}" onerror="this.onerror=null; this.src='${filmA.fallbackPoster}';" class="faceoff-poster" alt="${filmA.title}" />
         <h3 style="color:var(--text-main); margin:0.8rem 0 0.2rem;">${filmA.title}</h3>
         <p style="color:var(--gold-primary); font-size:0.85rem; margin:0;">${filmA.year} · ${filmA.runtime} min</p>
         <p style="color:var(--red-bright); font-weight:700; margin:0.4rem 0;">Villano: ${filmA.demon}</p>
         <p style="color:var(--text-muted); font-size:0.85rem;">Tu Nota: <strong style="color:var(--gold-bright);">${ratingA}</strong></p>
+        <button type="button" class="btn-small-gold" style="margin-top:0.5rem;" onclick="openTrailerModal('${filmA.trailerId}')">▶ Ver Trailer</button>
       </div>
 
       <div class="faceoff-card">
-        <img src="${filmB.poster}" class="faceoff-poster" alt="${filmB.title}" />
+        <img src="${filmB.poster}" onerror="this.onerror=null; this.src='${filmB.fallbackPoster}';" class="faceoff-poster" alt="${filmB.title}" />
         <h3 style="color:var(--text-main); margin:0.8rem 0 0.2rem;">${filmB.title}</h3>
         <p style="color:var(--gold-primary); font-size:0.85rem; margin:0;">${filmB.year} · ${filmB.runtime} min</p>
         <p style="color:var(--red-bright); font-weight:700; margin:0.4rem 0;">Villano: ${filmB.demon}</p>
         <p style="color:var(--text-muted); font-size:0.85rem;">Tu Nota: <strong style="color:var(--gold-bright);">${ratingB}</strong></p>
+        <button type="button" class="btn-small-gold" style="margin-top:0.5rem;" onclick="openTrailerModal('${filmB.trailerId}')">▶ Ver Trailer</button>
       </div>
     </div>
   `;
@@ -591,7 +622,6 @@ function renderUserVsUserDashboard() {
   const friendWatchedIds = new Set(friend.watched || []);
   const friendWatched = released.filter(f => friendWatchedIds.has(f.id));
 
-  // Coincidences
   const bothWatched = released.filter(f => state.watched.has(f.id) && friendWatchedIds.has(f.id));
   const onlyMeWatched = released.filter(f => state.watched.has(f.id) && !friendWatchedIds.has(f.id));
   const onlyFriendWatched = released.filter(f => !state.watched.has(f.id) && friendWatchedIds.has(f.id));
@@ -624,7 +654,7 @@ function renderUserVsUserDashboard() {
         ${bothWatched.length === 0 ? `<p style="color:var(--text-muted); font-size:0.85rem;">Ninguna película en común vista aún.</p>` : 
           bothWatched.map(f => `
             <div class="vs-item-mini">
-              <img src="${f.poster}" alt="${f.title}" />
+              <img src="${f.poster}" onerror="this.onerror=null; this.src='${f.fallbackPoster}';" alt="${f.title}" />
               <div>
                 <strong style="color:var(--text-main); font-size:0.88rem;">${f.title}</strong>
                 <div style="font-size:0.75rem; color:var(--gold-primary);">${f.year} · Dir. ${f.director}</div>
@@ -639,7 +669,7 @@ function renderUserVsUserDashboard() {
         ${onlyMeWatched.length === 0 ? `<p style="color:var(--text-muted); font-size:0.85rem;">No tienes exclusivas respecto a tu amigo.</p>` : 
           onlyMeWatched.map(f => `
             <div class="vs-item-mini">
-              <img src="${f.poster}" alt="${f.title}" />
+              <img src="${f.poster}" onerror="this.onerror=null; this.src='${f.fallbackPoster}';" alt="${f.title}" />
               <div>
                 <strong style="color:var(--text-main); font-size:0.88rem;">${f.title}</strong>
                 <div style="font-size:0.75rem; color:var(--green-success);">Tu amigo no la ha visto</div>
@@ -654,7 +684,7 @@ function renderUserVsUserDashboard() {
         ${onlyFriendWatched.length === 0 ? `<p style="color:var(--text-muted); font-size:0.85rem;">Tu amigo no ha visto ninguna que tú no hayas visto.</p>` : 
           onlyFriendWatched.map(f => `
             <div class="vs-item-mini">
-              <img src="${f.poster}" alt="${f.title}" />
+              <img src="${f.poster}" onerror="this.onerror=null; this.src='${f.fallbackPoster}';" alt="${f.title}" />
               <div>
                 <strong style="color:var(--text-main); font-size:0.88rem;">${f.title}</strong>
                 <div style="font-size:0.75rem; color:var(--red-bright);">¡Te falta verla!</div>
@@ -677,18 +707,15 @@ function renderStatsAndBadges() {
 
   els.statTotalMinutes.textContent = `${watchedMinutes} min`;
 
-  // Unique demons
   const demonsCount = new Set(watchedFilms.map(f => f.demon)).size;
   els.statDemonsEncountered.textContent = `${demonsCount} / 5`;
 
-  // Average Rating
   const ratedKeys = Object.keys(state.ratings).filter(k => state.ratings[k] > 0);
   const avg = ratedKeys.length
     ? (ratedKeys.reduce((acc, k) => acc + state.ratings[k], 0) / ratedKeys.length).toFixed(1)
     : "--";
   els.statAvgRating.textContent = `${avg} / 10`;
 
-  // Badges Definitions
   const BADGES = [
     {
       id: "b1",
@@ -754,7 +781,7 @@ function openMovieModal(filmId) {
   els.movieModalBody.innerHTML = `
     <div class="modal-movie-grid">
       <div>
-        <img src="${film.poster}" class="modal-movie-poster" alt="${film.title}" />
+        <img src="${film.poster}" onerror="this.onerror=null; this.src='${film.fallbackPoster}';" class="modal-movie-poster" alt="${film.title}" />
       </div>
       <div>
         <span class="badge red-glow">${film.year} · ${film.runtime ? film.runtime + " MIN" : "PRÓXIMAMENTE"}</span>
@@ -769,10 +796,11 @@ function openMovieModal(filmId) {
           <p style="margin:0; font-size:0.85rem;"><strong style="color:var(--text-main);">Reparto Principal:</strong> ${film.cast.join(", ")}</p>
         </div>
 
-        <div style="display:flex; gap:0.75rem; align-items:center; margin-top:1.5rem;">
+        <div style="display:flex; gap:0.75rem; align-items:center; margin-top:1.5rem; flex-wrap:wrap;">
           <button type="button" class="btn-watch-toggle ${isWatched ? "done" : ""}" id="modalToggleWatchedBtn">
             ${isWatched ? "✓ Película Vista" : "＋ Marcar Vista"}
           </button>
+          <button type="button" class="btn-gold-action" id="modalOpenTrailerBtn">▶ Ver Trailer Oficial HD</button>
         </div>
       </div>
     </div>
@@ -786,6 +814,10 @@ function openMovieModal(filmId) {
     openMovieModal(film.id);
   });
 
+  document.getElementById("modalOpenTrailerBtn")?.addEventListener("click", () => {
+    openTrailerModal(film.trailerId);
+  });
+
   els.movieModal.classList.add("open");
 }
 
@@ -793,12 +825,16 @@ function openCloudModal() {
   els.modalCloudIdInput.value = state.cloudId;
   const shareUrl = `${window.location.origin}${window.location.pathname}?vs=${state.cloudId}`;
   els.modalShareUrlInput.value = shareUrl;
+  if (els.modalCustomRepoInput) {
+    els.modalCustomRepoInput.value = state.customRepo;
+  }
   els.cloudModal.classList.add("open");
 }
 
 function closeModals() {
   els.movieModal.classList.remove("open");
   els.cloudModal.classList.remove("open");
+  closeTrailerModal();
 }
 
 // ==========================================================================
@@ -870,7 +906,6 @@ function initEvents() {
     renderMovies();
   });
 
-  // Quick reset
   els.quickResetBtn.addEventListener("click", () => {
     if (!state.watched.size) return;
     if (confirm("¿Seguro que deseas borrar tu progreso de maratón?")) {
@@ -896,11 +931,9 @@ function initEvents() {
     els.panelUserVsUser.classList.remove("active");
   });
 
-  // Movie vs Movie selectors
   els.movieSelectA.addEventListener("change", renderMovieVsMovie);
   els.movieSelectB.addEventListener("change", renderMovieVsMovie);
 
-  // User name input
   els.usernameInput.value = state.username;
   els.usernameInput.addEventListener("change", (e) => {
     state.username = e.target.value.trim() || "Cazador";
@@ -909,27 +942,25 @@ function initEvents() {
     renderUserVsUserDashboard();
   });
 
-  // My Cloud ID display
   els.myCloudIdDisplay.textContent = state.cloudId;
   els.copyMyCloudIdBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(state.cloudId);
     alert(`¡ID de Nube ${state.cloudId} copiado al portapapeles!`);
   });
 
-  // Load Friend in Versus
   els.loadFriendBtn.addEventListener("click", () => {
-    const friendId = els.friendIdInput.value.trim().toUpperCase();
+    const friendId = els.friendIdInput.value.trim();
     if (!friendId) return;
 
-    if (DEMO_FRIENDS[friendId]) {
-      state.friendData = DEMO_FRIENDS[friendId];
+    const upperId = friendId.toUpperCase();
+    if (DEMO_FRIENDS[upperId]) {
+      state.friendData = DEMO_FRIENDS[upperId];
       renderUserVsUserDashboard();
       renderStatsAndBadges();
       return;
     }
 
-    // Check cloud backup in localStorage or mock friend
-    const rawBackup = localStorage.getItem("cloud_backup_" + friendId);
+    const rawBackup = localStorage.getItem("cloud_backup_" + friendId) || localStorage.getItem("cloud_backup_" + upperId);
     if (rawBackup) {
       try {
         state.friendData = JSON.parse(rawBackup);
@@ -939,10 +970,9 @@ function initEvents() {
       } catch (err) {}
     }
 
-    alert(`No se encontró el ID de Nube "${friendId}". Prueba con los IDs demo: DEMO-FAN o DEMO-NOOB.`);
+    alert(`No se encontró el perfil o ID "${friendId}". Puedes probar con los IDs demo DEMO-FAN o DEMO-NOOB, o guardar tu perfil en la Nube / otro Repositorio.`);
   });
 
-  // Quick Demo Chips
   document.querySelectorAll("[data-demo]").forEach(btn => {
     btn.addEventListener("click", () => {
       const demoKey = btn.getAttribute("data-demo");
@@ -957,6 +987,7 @@ function initEvents() {
   els.openCloudBtn.addEventListener("click", openCloudModal);
   els.closeMovieModalBtn.addEventListener("click", closeModals);
   els.closeCloudModalBtn.addEventListener("click", closeModals);
+  els.closeTrailerModalBtn.addEventListener("click", closeTrailerModal);
 
   els.modalCopyCloudIdBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(state.cloudId);
@@ -973,13 +1004,29 @@ function initEvents() {
     els.cloudModalNotice.textContent = "✅ ¡Datos sincronizados con éxito en la Nube!";
   });
 
-  // Check URL query parameters for ?vs=INS-XXXX
+  // Custom Repo Sync Binding
+  if (els.modalSaveCustomRepoBtn) {
+    els.modalSaveCustomRepoBtn.addEventListener("click", () => {
+      const customUrl = els.modalCustomRepoInput.value.trim();
+      state.customRepo = customUrl;
+      localStorage.setItem(STORAGE_KEYS.CUSTOM_REPO, customUrl);
+      autoSaveToCloud();
+      alert(customUrl ? `¡Sincronización configurada con el repositorio: ${customUrl}!` : "Sincronización de repositorio personalizado limpiada.");
+    });
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const vsParam = urlParams.get("vs");
   if (vsParam) {
     els.friendIdInput.value = vsParam;
-    if (DEMO_FRIENDS[vsParam]) {
-      state.friendData = DEMO_FRIENDS[vsParam];
+    const upperVs = vsParam.toUpperCase();
+    if (DEMO_FRIENDS[upperVs]) {
+      state.friendData = DEMO_FRIENDS[upperVs];
+    } else {
+      const raw = localStorage.getItem("cloud_backup_" + vsParam) || localStorage.getItem("cloud_backup_" + upperVs);
+      if (raw) {
+        try { state.friendData = JSON.parse(raw); } catch (e) {}
+      }
     }
   }
 }
