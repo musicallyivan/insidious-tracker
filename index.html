@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insidious Tracker — Cronología Marvel Style, Modo Versus & Nube</title>
+  <meta name="description" content="Tracker estilo Marvel para la saga Insidious (La Noche del Demonio). Cronología interactiva, posters HD, modo Versus cara a cara y guardado de progreso en la nube." />
+  <meta name="theme-color" content="#07050a" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Creepster&family=Inter:wght@300;400;500;600;700;800&family=Special+Elite&display=swap" rel="stylesheet" />
+  
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient horror background effects -->
+  <div class="fog" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="red-portal-glow" aria-hidden="true"></div>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">🚪</span>
+        <span class="logo-text">INSIDIOUS<span class="logo-highlight">TRACKER</span></span>
+      </a>
+
+      <div class="nav-tabs" role="tablist">
+        <button class="nav-tab active" data-tab="timeline" role="tab" aria-selected="true">
+          <span class="tab-icon">🎬</span> Cronología
+        </button>
+        <button class="nav-tab" data-tab="grid" role="tab" aria-selected="false">
+          <span class="tab-icon">🎞️</span> Catálogo
+        </button>
+        <button class="nav-tab" data-tab="versus" role="tab" aria-selected="false">
+          <span class="tab-icon">⚔️</span> Modo Versus
+        </button>
+        <button class="nav-tab" data-tab="stats" role="tab" aria-selected="false">
+          <span class="tab-icon">📊</span> Estadísticas
+        </button>
+      </div>
+
+      <div class="nav-actions">
+        <button type="button" class="cloud-status-btn" id="openCloudBtn" title="Guardado en la Nube">
+          <span class="cloud-icon">☁️</span>
+          <span class="cloud-text" id="cloudStatusText">Nube: Conectada</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Hero Header & Global Marathon Tracker -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge-row">
+          <span class="badge red-glow">SAGA COMPLETA · THE FURTHER</span>
+          <span class="badge gold-glow">MARVEL TRACKER STYLE</span>
+        </div>
+        <h1 class="hero-title">INSIDIOUS <span>CINEMATIC TRACKER</span></h1>
+        <p class="hero-subtitle">
+          Sigue la historia de Elise Rainier y los Lambert, compara tu progreso en el <strong>Modo Versus</strong> y sincroniza tus datos en la nube.
+        </p>
+
+        <!-- Global Marathon Progress Bar -->
+        <div class="marathon-progress-card">
+          <div class="progress-info">
+            <div class="progress-label">
+              <span class="progress-icon">⏱️</span>
+              <span>Progreso de Maratón</span>
+            </div>
+            <div class="progress-stats">
+              <strong id="progressWatchedCount">0 / 5 Vistas</strong>
+              <span class="progress-pct" id="progressPctText">(0%)</span>
+            </div>
+          </div>
+          
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="marathon-meta-row">
+            <span id="marathonTimeText">⌛ Tiempo visto: 0 min de 516 min</span>
+            <button type="button" class="btn-text-ghost" id="quickResetBtn">Resetear progreso</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Premiere Countdown Card -->
+      <aside class="countdown-widget" id="countdownWidget">
+        <div class="countdown-head">
+          <span class="countdown-badge">PRÓXIMO ESTRENO DE CINES</span>
+          <h2 class="countdown-movie-title">Out of the Further</h2>
+          <p class="countdown-date-str">21 de Agosto de 2026</p>
+        </div>
+
+        <div class="countdown-digits-grid">
+          <div class="digit-box">
+            <span class="digit-val" id="cdDays">--</span>
+            <span class="digit-lbl">Días</span>
+          </div>
+          <div class="digit-box">
+            <span class="digit-val" id="cdHours">--</span>
+            <span class="digit-lbl">Horas</span>
+          </div>
+          <div class="digit-box">
+            <span class="digit-val" id="cdMins">--</span>
+            <span class="digit-lbl">Min</span>
+          </div>
+          <div class="digit-box">
+            <span class="digit-val" id="cdSecs">--</span>
+            <span class="digit-lbl">Seg</span>
+          </div>
+        </div>
+
+        <p class="countdown-status-msg" id="cdStatus">Calculando el regreso del demonio...</p>
+      </aside>
+    </header>
+
+    <!-- SECTION 1: TIMELINE & CATALOG GRID -->
+    <section class="tab-content active" id="sec-timeline">
+      
+      <!-- Toolbar Filters & Order toggle -->
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Buscar por título, entidad (Lipstick-Face, Keyface), director..." />
+          <button type="button" id="clearSearchBtn" class="clear-search-btn" title="Limpiar búsqueda" style="display:none;">✕</button>
+        </div>
+
+        <div class="filter-controls">
+          <div class="btn-group" role="group" aria-label="Orden de visualización">
+            <button type="button" class="toggle-btn active" id="btnOrderChrono" data-order="chrono">
+              📜 Orden Cronológico
+            </button>
+            <button type="button" class="toggle-btn" id="btnOrderRelease" data-order="release">
+              🍿 Orden de Estreno
+            </button>
+          </div>
+
+          <div class="filter-dropdown-wrap">
+            <select id="filterStatus" class="custom-select">
+              <option value="all">Todas las películas</option>
+              <option value="watched">✓ Vistas</option>
+              <option value="unwatched">⏳ Pendientes</option>
+              <option value="released">Ya estrenadas</option>
+              <option value="upcoming">Próximos estrenos</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline & Catalog Header Info -->
+      <div class="section-title-wrap">
+        <h2 id="timelineSectionTitle" class="section-title">Cronología de The Further</h2>
+        <p id="timelineSectionSub" class="section-sub">Explora los eventos en orden de la historia, desde los orígenes de Elise Rainier hasta el presente.</p>
+      </div>
+
+      <!-- Main Movies Layout (Supports Timeline connectors or Grid view) -->
+      <div class="movies-container view-timeline" id="moviesContainer">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: MODO VERSUS (USER VS USER & MOVIE VS MOVIE WITH CLOUD SAVE) -->
+    <section class="tab-content" id="sec-versus">
+      <div class="section-title-wrap text-center">
+        <h2 class="section-title">⚔️ MODO VERSUS (CARA A CARA)</h2>
+        <p class="section-sub">Compara tu maratón de terror contra un amigo guardando tus datos en la Nube o enfrenta dos películas cara a cara.</p>
+      </div>
+
+      <!-- Sub-tabs for Versus mode -->
+      <div class="versus-subtabs">
+        <button class="subtab-btn active" id="subtabUserVsUser">👥 Tú vs Amigo (Progreso en Nube)</button>
+        <button class="subtab-btn" id="subtabMovieVsMovie">🎬 Película A vs Película B</button>
+      </div>
+
+      <!-- SUB-TAB A: USER VS USER CLOUD BATTLE -->
+      <div class="versus-panel active" id="panelUserVsUser">
+        <div class="versus-cloud-header">
+          <div class="user-profile-box">
+            <span class="user-avatar">👤</span>
+            <div class="user-meta">
+              <label for="usernameInput" class="input-lbl">Tu Nombre de Cazador:</label>
+              <input type="text" id="usernameInput" value="Usuario Further" maxlength="20" />
+            </div>
+            <div class="user-cloud-id-box">
+              <span class="lbl">Tu ID de Nube:</span>
+              <strong id="myCloudIdDisplay">INS-WAITING</strong>
+              <button type="button" class="btn-small-gold" id="copyMyCloudIdBtn">📋 Copiar ID</button>
+            </div>
+          </div>
+
+          <div class="versus-vs-badge">VS</div>
+
+          <div class="friend-profile-box">
+            <span class="user-avatar friend-avatar">👹</span>
+            <div class="user-meta">
+              <label for="friendIdInput" class="input-lbl">ID de Nube del Amigo:</label>
+              <div class="input-with-btn">
+                <input type="text" id="friendIdInput" placeholder="Ej: INS-7842" />
+                <button type="button" class="btn-red-action" id="loadFriendBtn">⚡ Cargar Amigo</button>
+              </div>
+            </div>
+            <div class="demo-friends-quick">
+              <span>Probar IDs demo:</span>
+              <button type="button" class="chip-btn" data-demo="DEMO-FAN">Demo Fan (100%)</button>
+              <button type="button" class="chip-btn" data-demo="DEMO-NOOB">Demo Novato (40%)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparative Dashboard Results -->
+        <div class="versus-dashboard" id="versusDashboard">
+          <!-- Dynamically generated comparison -->
+        </div>
+      </div>
+
+      <!-- SUB-TAB B: MOVIE VS MOVIE FACE-OFF -->
+      <div class="versus-panel" id="panelMovieVsMovie">
+        <div class="movie-selector-row">
+          <div class="select-movie-card">
+            <label for="movieSelectA" class="select-label">Película A:</label>
+            <select id="movieSelectA" class="custom-select"></select>
+          </div>
+          <div class="vs-divider">VS</div>
+          <div class="select-movie-card">
+            <label for="movieSelectB" class="select-label">Película B:</label>
+            <select id="movieSelectB" class="custom-select"></select>
+          </div>
+        </div>
+
+        <div class="movie-versus-comparison" id="movieVersusComparison">
+          <!-- Dynamically populated face-off table/cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ESTADÍSTICAS & LOGROS -->
+    <section class="tab-content" id="sec-stats">
+      <div class="section-title-wrap text-center">
+        <h2 class="section-title">📊 Estadísticas de Maratón & Logros</h2>
+        <p class="section-sub">Analiza tus datos de visualización y desbloquea insignias de superación en The Further.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-val" id="statTotalMinutes">0 min</div>
+          <div class="stat-lbl">Tiempo acumulado de terror</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👻</div>
+          <div class="stat-val" id="statDemonsEncountered">0 / 5</div>
+          <div class="stat-lbl">Demonios & Entidades vistas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-val" id="statAvgRating">-- / 10</div>
+          <div class="stat-lbl">Tu nota media otorgada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-val" id="statBadgesUnlocked">0 / 5</div>
+          <div class="stat-lbl">Insignias de maratón</div>
+        </div>
+      </div>
+
+      <div class="badges-section">
+        <h3 class="badges-title">🎖️ Insignias de la Saga</h3>
+        <div class="badges-grid" id="badgesGrid">
+          <!-- Dynamically generated badges -->
+        </div>
+      </div>
+
+      <!-- GITHUB PROJECT CARD -->
+      <div class="github-project-card">
+        <div class="github-card-header">
+          <div class="github-logo-box">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text-main);">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <div>
+              <h3 class="github-repo-title">insidious-tracker</h3>
+              <p class="github-repo-sub">Proyecto Open Source en GitHub</p>
+            </div>
+          </div>
+          <span class="badge gold-glow">v2.0 Marvel Edition</span>
+        </div>
+
+        <p class="github-card-desc">
+          Código fuente abierto diseñado para amantes del cine de terror. Construido con HTML5, Vanilla CSS3 y JavaScript ES6+ con sincronización en la Nube y sistema Versus.
+        </p>
+
+        <div class="github-stats-row">
+          <div class="github-chip">⭐ Stars: <span>+100</span></div>
+          <div class="github-chip">🍴 Forks: <span>+25</span></div>
+          <div class="github-chip">📜 License: <span>MIT</span></div>
+        </div>
+
+        <div class="github-actions">
+          <a href="https://github.com/music/insidious-tracker" target="_blank" rel="noopener" class="btn-github-primary">
+            <span>🚀 Ver en GitHub</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MOVIE DETAIL MODAL -->
+  <div class="modal-backdrop" id="movieModal" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeMovieModalBtn" aria-label="Cerrar modal">✕</button>
+      <div class="modal-body" id="movieModalBody">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOUD SYNC MODAL -->
+  <div class="modal-backdrop" id="cloudModal" aria-hidden="true">
+    <div class="modal-card cloud-modal-card">
+      <button type="button" class="modal-close-btn" id="closeCloudModalBtn" aria-label="Cerrar modal">✕</button>
+      <div class="cloud-modal-header">
+        <span class="cloud-big-icon">☁️</span>
+        <h2>Guardado en la Nube & Sincronización</h2>
+        <p>Tus películas vistas y calificaciones se pueden sincronizar entre cualquier dispositivo mediante tu ID de Nube o un enlace directo.</p>
+      </div>
+
+      <div class="cloud-modal-body">
+        <div class="cloud-box">
+          <label class="lbl">Tu Código / ID de Nube Actual:</label>
+          <div class="input-with-btn">
+            <input type="text" id="modalCloudIdInput" readonly />
+            <button type="button" class="btn-gold-action" id="modalCopyCloudIdBtn">📋 Copiar ID</button>
+          </div>
+        </div>
+
+        <div class="cloud-box">
+          <label class="lbl">Cargar datos desde un ID de Nube:</label>
+          <div class="input-with-btn">
+            <input type="text" id="modalImportCloudIdInput" placeholder="Introduce ID (Ej: INS-7842)..." />
+            <button type="button" class="btn-red-action" id="modalSyncFromCloudBtn">🔄 Sincronizar</button>
+          </div>
+        </div>
+
+        <div class="cloud-box">
+          <label class="lbl">Enlace Directo de Compartir Progreso:</label>
+          <div class="input-with-btn">
+            <input type="text" id="modalShareUrlInput" readonly />
+            <button type="button" class="btn-gold-action" id="modalCopyShareUrlBtn">🔗 Copiar Enlace</button>
+          </div>
+        </div>
+
+        <div class="cloud-actions-row">
+          <button type="button" class="btn-green-action" id="modalForceSaveCloudBtn">☁️ Guardar Ahora en Nube</button>
+        </div>
+
+        <p class="cloud-notice" id="cloudModalNotice">✅ Estado: Datos guardados localmente y listos para sincronizar.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <div class="footer-links">
+      <a href="privacy.html">Política de Privacidad</a> · 
+      <a href="terms.html">Términos de Uso</a> · 
+      <a href="legal.html">Aviso Legal</a> · 
+      <a href="https://github.com/music/insidious-tracker" target="_blank" rel="noopener">GitHub Project</a>
+    </div>
+    <p>Insidious Tracker · Proyecto fan no oficial creado con estética Marvel Tracker · Todos los carteles y datos pertenecen a Blumhouse / Sony / Screen Gems.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

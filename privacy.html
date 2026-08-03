@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — Insidious Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Creepster&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .subpage-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-red);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-main);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--gold-primary);
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .back-link:hover { color: var(--gold-bright); }
+    h1 { font-family: var(--font-cinzel); color: var(--text-main); margin-top: 0; }
+    h2 { font-family: var(--font-cinzel); color: var(--gold-primary); font-size: 1.2rem; margin-top: 1.5rem; }
+    p, li { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="fog"></div>
+  <div class="vignette"></div>
+
+  <div class="subpage-container">
+    <a href="index.html" class="back-link">← Volver al Tracker Principal</a>
+    <h1>🔒 Política de Privacidad</h1>
+    <p>Última actualización: Agosto de 2026</p>
+
+    <hr style="border-color: var(--border-red); margin: 1.5rem 0;" />
+
+    <h2>1. Responsabilidad sobre sus Datos</h2>
+    <p>Insidious Tracker es una aplicación web gratuita creada por fans para fans de la saga cinematográfica de terror <em>Insidious</em>. Respetamos al máximo la privacidad de nuestros usuarios.</p>
+
+    <h2>2. Datos que recopilamos</h2>
+    <p>Insidious Tracker funciona bajo el principio de <strong>Almacenamiento Local (LocalFirst)</strong>. Los siguientes datos se almacenan exclusivamente en su propio navegador a través de <code>localStorage</code>:</p>
+    <ul>
+      <li>Su lista de películas vistas / pendientes.</li>
+      <li>Sus valoraciones personales (estrellas 1-10) asignadas a cada película.</li>
+      <li>Su nombre de usuario personalizado para el Modo Versus.</li>
+      <li>Su ID único de Nube (utilizado únicamente si decide compartir o sincronizar su progreso).</li>
+    </ul>
+
+    <h2>3. Sincronización en la Nube y Modo Versus</h2>
+    <p>Al utilizar el <strong>Modo Versus</strong> o la función de <strong>Guardado en la Nube</strong>, los datos de su perfil (progreso de películas y nombre de usuario) se transfieren de forma cifrada/anonimizada mediante identificadores de sesión. No recopilamos nombres reales, direcciones de correo electrónico, contraseñas ni datos sensibles.</p>
+
+    <h2>4. Cookies y Almacenamiento Local</h2>
+    <p>Esta aplicación NO utiliza cookies publicitarias ni rastreadores de terceros de analítica. Únicamente se emplean tecnologías de almacenamiento web estándar (<code>localStorage</code>) para recordar su progreso de maratón entre visitas.</p>
+
+    <h2>5. Derechos del Usuario</h2>
+    <p>Usted tiene el control total de sus datos. En cualquier momento puede restablecer o borrar todo su progreso directamente desde el botón "Resetear progreso" ubicado en el panel principal de la aplicación.</p>
+
+    <h2>6. Contacto</h2>
+    <p>Para sugerencias, dudas o incidencias sobre el proyecto, consulte nuestro repositorio oficial en GitHub.</p>
+  </div>
+
+  <footer class="main-footer">
+    <p>Insidious Tracker · Proyecto Fan No Oficial · <a href="terms.html" style="color:var(--gold-primary);">Términos de uso</a> · <a href="legal.html" style="color:var(--gold-primary);">Aviso Legal</a></p>
+  </footer>
+</body>
+</html>
