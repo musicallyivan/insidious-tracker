@@ -27,7 +27,7 @@
   </header>
 
   <!-- Top Navigation Bar -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" inert>
     <div class="nav-container">
       <a href="#" class="nav-logo">
         <span class="logo-icon">🚪</span>
@@ -59,7 +59,7 @@
   </nav>
 
   <!-- Main Container -->
-  <div class="app-container">
+  <div class="app-container" inert>
     
     <!-- Hero Header & Global Marathon Tracker -->
     <header class="hero-section">
@@ -318,7 +318,7 @@
   </div>
 
   <!-- MOVIE DETAIL MODAL -->
-  <div class="modal-backdrop" id="movieModal" aria-hidden="true">
+  <div class="modal-backdrop" id="movieModal" aria-hidden="true" inert>
     <div class="modal-card">
       <button type="button" class="modal-close-btn" id="closeMovieModalBtn" aria-label="Cerrar modal">✕</button>
       <div class="modal-body" id="movieModalBody">
@@ -328,7 +328,7 @@
   </div>
 
   <!-- TRAILER VIDEO MODAL -->
-  <div class="modal-backdrop" id="trailerModal" aria-hidden="true">
+  <div class="modal-backdrop" id="trailerModal" aria-hidden="true" inert>
     <div class="modal-card trailer-modal-card">
       <button type="button" class="modal-close-btn" id="closeTrailerModalBtn" aria-label="Cerrar trailer">✕</button>
       <div class="trailer-video-wrap">
@@ -338,7 +338,7 @@
   </div>
 
   <!-- CLOUD & REPO SYNC MODAL -->
-  <div class="modal-backdrop" id="cloudModal" aria-hidden="true">
+  <div class="modal-backdrop" id="cloudModal" aria-hidden="true" inert>
     <div class="modal-card cloud-modal-card">
       <button type="button" class="modal-close-btn" id="closeCloudModalBtn" aria-label="Cerrar modal">✕</button>
       <div class="cloud-modal-header">
@@ -389,7 +389,7 @@
     </div>
   </div>
 
-  <footer class="main-footer">
+  <footer class="main-footer" inert>
     <div class="footer-links">
       <a href="privacy.html">Política de Privacidad</a> · 
       <a href="terms.html">Términos de Uso</a> · 
@@ -398,6 +398,11 @@
     </div>
     <p>Insidious Tracker · Proyecto fan no oficial · Todos los carteles y datos pertenecen a Blumhouse / Sony / Screen Gems.</p>
   </footer>
+
+  <!-- Full-page farewell overlay: intentionally prevents interaction with the tracker. -->
+  <section class="farewell-overlay" role="dialog" aria-modal="true" aria-labelledby="farewellTitle" tabindex="-1">
+    <h1 id="farewellTitle">NOS VEMOS CUANDO HAYA UNA NUEVA ENTREGA</h1>
+  </section>
 
   <script src="script.js"></script>
 </body>
